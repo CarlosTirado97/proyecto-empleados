@@ -1,0 +1,76 @@
+    .container {
+        width: 100%;
+        height: 590px;
+    }
+    
+    #listaEmpleadosDiv {
+        float: left;
+        width: 100%;
+        height: auto;
+        background-color: lightblue;
+    }
+    
+    #encabezado {
+        width: 100%;
+        height: 10%;
+    }
+    
+    #encabezado h4 {
+        text-align: center;
+    }
+    
+    #divTablaEmpleados table {
+        text-align: center;
+        width: 100%;
+        background-color: lightyellow;
+    }
+    
+    #divTablaEmpleados table th {
+        width: 20%;
+        background-color: lightblue;
+    }
+    
+    #divTablaEmpleados table td {
+        text-align: center;
+    }
+    
+    #botonNuevo {
+        width: 20%;
+        height: 10%;
+        float: right;
+    }
+    
+    #modalForm {
+        position: relative;
+        width: 80%;
+        left: 10%;
+        height: 80%;
+    }
+    
+    .inputForm {
+        width: 100%;
+    }
+    
+    .inputForm input,
+    select {
+        width: 100%;
+        display: list-item;
+        margin-bottom: 2%;
+        border: 2px solid lightblue;
+    }
+    
+    .modalBottom {
+        margin-top: 2%;
+        width: 50%;
+        height: 20%;
+        float: left;
+    }
+    
+    .modalBottom button {
+        margin-left: 50%;
+        transform: translate(-50%, 0%);
+    }
+    
+    .errorInput {
+        color: red;
+    }

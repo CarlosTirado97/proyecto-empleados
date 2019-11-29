@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <button type="button" (click)="agregarEmpleado()" id="botonNuevo" class="btn btn-primary" data-toggle="modal" data-target="#modelId">
+            Nuevo
+          </button>
+        <div id="listaEmpleadosDiv">
+            <div id="encabezado">
+                <h4>Lista de Empleados</h4>
+            </div>
+            <div id="divTablaEmpleados">
+                <table>
+                    <tr>
+                        <th>Nombre Completo</th>
+                        <th>Fecha Nacimiento</th>
+                        <th>Departamento</th>
+                        <th>Sueldo</th>
+                        <th>Accion</th>
+                    </tr>
+                    <tr *ngFor="let empleadoo of empleados">
+                        <td>{{empleadoo.Nombre}} {{empleadoo.ApPaterno}} {{empleadoo.ApMaterno}}</td>
+                        <td>{{empleadoo.FecNac | date:'yyyy-MM-dd'}}</td>
+                        <td>{{empleadoo.Descripcion}}</td>
+                        <td>{{empleadoo.Sueldo}}</td>
+                        <td><button class="btn btn-info" (click)="modificarEmpleado(empleadoo);" data-toggle="modal" data-target="#modelId">Modificar</button><button class="btn btn-danger" (click)="deleteEmpleado(empleadoo)">Eliminar</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="height: 100%;">
+
+                    <form style="height: 100%;" [formGroup]="grupoEmpleado">
+                        <div id="modalForm">
+                            <div class="form-group">
+                                <label for="Nombre">Nombre <span  *ngIf="grupoEmpleado.get('Nombre').hasError('required') && empleado.Nombre.length == 0 ">*</span></label>
+                                <input class="form-control" type="text" [(ngModel)]="empleado.Nombre" formControlName="Nombre" name="Nombre">
+
+                                <p class="errorInput" *ngIf="grupoEmpleado.get('Nombre').hasError('maxlength')">Max 50 caracteres</p>
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="ApPaterno ">Apellido Paterno <span *ngIf="grupoEmpleado.get('ApPaterno').hasError('required')  && empleado.ApPaterno == ''">*</span></label>
+                                <input class="form-control " type="text " [(ngModel)]="empleado.ApPaterno " formControlName="ApPaterno" name="ApPaterno ">
+                                <p class="errorInput" *ngIf="grupoEmpleado.get('ApPaterno').hasError('maxlength')">Max 50 caracteres</p>
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="ApMaterno ">Apellido Materno <span  *ngIf="grupoEmpleado.get('ApMaterno').hasError('required')  && empleado.ApMaterno == ''">*</span></label>
+                                <input class="form-control " type="text " [(ngModel)]="empleado.ApMaterno " formControlName="ApMaterno" name="ApMaterno ">
+                                <p class="errorInput" *ngIf="grupoEmpleado.get('ApMaterno').hasError('maxlength')">Max 50 caracteres</p>
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="Departamento ">Departamento <span  *ngIf="grupoEmpleado.get('Departamento').hasError('required')  && empleado.Departamento == null">*</span></label>
+                                <select class="form-control " name="Departamento " [(ngModel)]="empleado.Departamento" formControlName="Departamento">
+                              <option *ngFor="let departamento of departamentos " value="{{departamento.id}} ">{{departamento.Descripcion}}</option>
+                            </select>
+
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="Sueldo ">Sueldo <span  *ngIf="grupoEmpleado.get('Sueldo').hasError('required')  && empleado.Sueldo == null ">*</span></label>
+                                <input class="form-control " type="number" [(ngModel)]="empleado.Sueldo " formControlName="Sueldo" name="Sueldo ">
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="FecNac ">Fecha de Nacimiento <span  *ngIf="grupoEmpleado.get('FecNac').hasError('required')  && empleado.FecNac == null">*</span></label>
+                                <input class="form-control " type="date" [(ngModel)]="empleado.FecNac " formControlName="FecNac" name="FecNac ">
+                            </div>
+
+                        </div>
+                        <div class="modalBottom form-group ">
+
+                            <button [disabled]="!grupoEmpleado.valid" class="btn btn-primary " type="button " (click)="insertUpdateEmpleado() " data-dismiss="modal">Guardar</button>
+                        </div>
+                        <div class="modalBottom form-group ">
+                            <button class="btn btn-warning " (click)="getEmpleados() " type="button " data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
